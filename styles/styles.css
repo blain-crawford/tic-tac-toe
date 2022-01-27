@@ -1,3 +1,35 @@
-h1 {
-  color: blue;
+@import url(./reset.css);
+body,
+html {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#page-topper {
+  text-align: center;
+  font-size: 50px;
+  width: 100%;
+  margin: 0 auto 50px auto;
+  border: 1px solid green;
+}
+
+#game-container {
+  border: 1px solid black;
+}
+
+#game-board {
+  border: 1px solid blue;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.game-square {
+  border: 1px solid red;
 }
