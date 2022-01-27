@@ -35,21 +35,29 @@ html {
 
 #game-and-score-container {
   border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
 }
 
+.score-container {
+  border: 1px solid green;
+}
 
 #game-board {
   border: 1px solid blue;
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  min-width: 200px;
+  height: 300px;
+  min-height: 200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 2px;
+  grid-row-gap: 2px;
 }
 
 .game-square {
-  border: 1px solid red;
+  background-color: blue;
 } 

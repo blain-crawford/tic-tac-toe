@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/styles.css">
-  <title>Tic Tac Toe</title>
-</head>
-<body>
-  <div id="page-topper"><h1>TIC TAC TOE</h1></div>
-  <div id="player-or-bot">
-    <div class="player-selector">Player</div>
-    <div class="player-selector">AI</div>
-  </div>
-  <div id="game-and-score-container">
-    <div class="score-container"></div>
-    <div id="game-board">
-      <div class="game-square" data-block="0"></div>
-      <div class="game-square" data-block="1"></div>
-      <div class="game-square" data-block="2"></div>
-      <div class="game-square" data-block="3"></div>
-      <div class="game-square" data-block="4"></div>
-      <div class="game-square" data-block="5"></div>
-      <div class="game-square" data-block="6"></div>
-      <div class="game-square" data-block="7"></div>
-      <div class="game-square" data-block="8"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div id="page-topper"><h1>TIC TAC TOE</h1></div>
+    <div id="player-or-bot">
+      <div class="player-selector">Player</div>
+      <div class="player-selector">AI</div>
     </div>
-   
-    <div class="score-container"></div>
-  </div>
-  
-  <script src="./scripts/scripts.js"></script>
-</body>
+    <div id="game-and-score-container">
+      <div class="score-container">
+        <h2>Player One:</h2>
+      </div>
+      <div id="game-board">
+        <div class="game-square" data-block="0"></div>
+        <div class="game-square" data-block="1"></div>
+        <div class="game-square" data-block="2"></div>
+        <div class="game-square" data-block="3"></div>
+        <div class="game-square" data-block="4"></div>
+        <div class="game-square" data-block="5"></div>
+        <div class="game-square" data-block="6"></div>
+        <div class="game-square" data-block="7"></div>
+        <div class="game-square" data-block="8"></div>
+      </div>
+      <div class="score-container">
+        <h2>Player Two:</h2>
+      </div>
+    </div>
+
+    <script src="./scripts/scripts.js"></script>
+  </body>
 </html>
