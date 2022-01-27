@@ -33,9 +33,10 @@ html {
   border: 1px solid black;
 }
 
-/* #game-container {
+#game-and-score-container {
   border: 1px solid black;
 }
+
 
 #game-board {
   border: 1px solid blue;
@@ -51,4 +52,4 @@ html {
 
 .game-square {
   border: 1px solid red;
-} */ */
+} 
