@@ -7,16 +7,21 @@ html {
   text-align: center;
 }
 
-#page-topper {
-  text-align: center;
-  font-size: 50px;
-  min-width: 0;
+#container {
+  width: 900px;
+  min-width: none;
+  height: auto;
   margin: 0 auto;
-  border: 1px solid green;
 }
 
-#player-or-bot {
-  border: 1px solid pink;
+#page-topper {
+  text-align: center;
+  font-size: 30px;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+#player-or-AI {
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
@@ -26,31 +31,38 @@ html {
 
 .player-selector {
   width: 5em;
-  height: 1em;
-  font-size: 20px;
+  height: .5em;
+  line-height: 10px;
+  font-size: 30px;
   border-radius: 15%;
   padding: 10px;
-  border: 1px solid black;
+  border: 2px solid blue;
+}
+
+#player-container {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  font-size: 30px;
 }
 
 #game-and-score-container {
-  border: 1px solid black;
   padding: 20px;
   display: flex;
   justify-content: space-around;
 }
 
 .score-container {
-  border: 1px solid green;
+  font-size: 60px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 #game-board {
-  border: 1px solid blue;
-  width: 300px;
-  min-width: 200px;
-  height: 300px;
-  min-height: 200px;
-  margin: 0 auto;
+  min-width: 500px;
+  min-height: 500px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
