@@ -1,21 +1,25 @@
 'use strict';
-const boardSquares = document.querySelectorAll('.game-square');
+
 
 const Game = (function () {
-  let board = ['','','','','','','','','']
+  let _board = ['','','','','','','','','']
+  const _boardSquares = document.querySelectorAll('.game-square');
 
   const playerMove = function (value) {
     value = this.dataset.block
     this.innerText = 'X'
-    board[value] = this.innerText;
-    console.log(board);
+    _board[value] = this.innerText;
+    console.log(_board);
   }
+
+  _boardSquares.forEach(square => {
+    square.addEventListener('click', playerMove, false);
+  });
+  
   return {playerMove};
 })();
 
-boardSquares.forEach(square => {
-  square.addEventListener('click', Game.playerMove, false);
-});
+
 
 
 
