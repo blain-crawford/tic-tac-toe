@@ -4,13 +4,19 @@ const Game = (function () {
   let _board = [['','',''], ['','',''], ['','','']]
   const _boardSquares = document.querySelectorAll('.game-square');
   const winnerBanner = document.getElementById('winner');
-  const playerOneMove = function (row, square) {
+
+ 
+
+  let makeMove = function (row, square, player) {
+    _board[row][square] = `${player}`;
+    console.log(_board);
+  };
+  
+  const playerOneMove = function () {
     if(this.innerText === ''){
-      let row = this.dataset.row;
-      let square = this.dataset.square;
       this.innerText = 'X';
-      _board[row][square] = `${this.innerText}${square}`;
-      console.log(_board);
+      makeMove(this.dataset.row, this.dataset.square, this.innerText);
+
       _boardSquares.forEach(square => {
         square.removeEventListener('click', playerOneMove, false);
       })
@@ -20,13 +26,11 @@ const Game = (function () {
     }
   };
 
-  const playerTwoMove = function (value) {
+  const playerTwoMove = function () {
     if(this.innerText === '') {
-      let row = this.dataset.row;
-      let square = this.dataset.square;
       this.innerText = 'O';
-      _board[row][square] = `${this.innerText}${square}`;
-      console.log(_board);
+      makeMove(this.dataset.row, this.dataset.square, this.innerText);
+
       _boardSquares.forEach(square => {
         square.removeEventListener('click', playerTwoMove, false);
       })
@@ -36,9 +40,7 @@ const Game = (function () {
     }
   };
 
-  // const decideWinner = function {
-  //   if (_board[0] === 'X' &&&)
-  // }
+
 
   _boardSquares.forEach(square => {
     square.addEventListener('click', playerOneMove, false);
