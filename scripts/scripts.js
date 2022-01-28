@@ -17,15 +17,13 @@ const Game = (function () {
   };
 
  const checkForWinner = function (currentMoves) {
-   for (let i = 0; i < currentMoves.length; i++ ) {
-     debugger;
-    if(currentMoves[i] === ['X', 'X', 'X']) {
-      gameOver('Player One Wins!');
-    } else if (currentMoves[i] === ['O', 'O', 'O']) {
-      gameOver('Player Two Wins!');
+  for (let i = 0; i < currentMoves.length; i++) {
+    if (currentMoves[i][0] === 'X' && currentMoves[i][1] === 'X' && currentMoves[i][2] === 'X') {
+      gameOver('Player One WINS!!!');
+    } else if (currentMoves[i][0] === 'X' && currentMoves[i][1] === 'X' && currentMoves[i][2] === 'X') {
+      gameOver('Player Two WINS!!!');
     }
-    console.log('being called')
-   }
+  }
  }
 
   let makeMove = function (row, square, player) {
