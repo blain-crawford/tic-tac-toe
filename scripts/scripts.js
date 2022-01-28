@@ -26,7 +26,9 @@ const Game = (function () {
       _board[i] = '';
     }
   };
+
   clearButton.addEventListener('click', clearBoard, false);
+
   const gameOver = function (winner) {
     winnerBanner.innerText = winner;
     _boardSquares.forEach((square) => {
@@ -38,7 +40,7 @@ const Game = (function () {
   };
 
   const checkForWinner = function (currentMoves, winningMoves) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < _board.length; i++) {
       let a = currentMoves[winningMoves[i][0]];
       let b = currentMoves[winningMoves[i][1]];
       let c = currentMoves[winningMoves[i][2]];
@@ -94,10 +96,6 @@ const Game = (function () {
     square.addEventListener('click', playerOneMove, false);
   });
 
-  return { playerOneMove, playerTwoMove };
+  return {playerOneMove, playerTwoMove };
 })();
 
-//   _boardSquares.forEach((square) => {
-//     square.removeEventListener('click', playerTwoMove, false);
-//   });
-// };
