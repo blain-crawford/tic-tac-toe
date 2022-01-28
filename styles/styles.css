@@ -3,7 +3,7 @@ body,
 html {
   margin: 0;
   padding: 0;
-  box-sizing: ;
+  box-sizing: border-box;
   text-align: center;
 }
 
