@@ -103,14 +103,24 @@ const Game = (function () {
   };
 
   const activatePlayerOneAI = function() {
-    if(this.value === 'AI') {
-      aiMove('X');
+    if(playerOneHumanOrAI.value === 'AI') {
+      playerOneMove();
     }
     if(this.value === 'player') {
       clearBoard();
     }
+    if(playerOneHumanOrAI.value === 'AI' && playerTwoHumanOrAI.value === 'AI') {
+      for(let i = 0; i < _board.length; i++){
+        if(_board[i] === '') {
+          console.log(_board)
+          playerOneMove();
+          playerTwoMove();
+        }
+      }
+    }  
   };
   playerOneHumanOrAI.addEventListener('change', activatePlayerOneAI.bind(playerOneHumanOrAI), false);
+  playerTwoHumanOrAI.addEventListener('change', activatePlayerOneAI.bind(playerTwoHumanOrAI), false);
 
   const makeMove = function (square, player) {
     _board[square] = `${player}`;
@@ -130,7 +140,6 @@ const Game = (function () {
     possibleAIMoves = [];
     
     if (move === 'O') {
-      console.log(move === 'O');
       _boardSquares.forEach((square) => {
         square.removeEventListener('click', playerTwoMove, false);
       });
@@ -138,7 +147,6 @@ const Game = (function () {
         square.addEventListener('click', playerOneMove, false);
       });
     } else if (move === 'X') {
-      console.log(move)
       _boardSquares.forEach((square) => {
         square.removeEventListener('click', playerOneMove, false);
       });
@@ -146,10 +154,6 @@ const Game = (function () {
         square.addEventListener('click', playerTwoMove, false);
       });
     }
-  };
-
-  if(playerOneHumanOrAI.value === 'AI') {
-    console.log(aiTurn);
   };
 
   const playerOneMove = function () {
@@ -171,6 +175,9 @@ const Game = (function () {
 
     if (playerOneHumanOrAI.value === 'AI') {
       aiMove('X');
+      if(playerTwoHumanOrAI.value === 'AI') {
+        aiMove('O');
+      }
     }
 
 
@@ -196,6 +203,9 @@ const Game = (function () {
 
     if (playerTwoHumanOrAI.value === 'AI') {
       aiMove('O');
+      if(playerOneHumanOrAI.value === 'AI') {
+        aiMove('X');
+      }
     }
 
     checkForWinner(_board, _winningConditions);
