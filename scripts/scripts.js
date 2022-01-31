@@ -17,20 +17,31 @@ const Game = (function () {
   const clearButton = document.querySelector('#clear-button');
   const playerOneScore = document.getElementById('player-one-score');
   const playerTwoScore = document.getElementById('player-two-score');
+
   const clearBoard = function () {
+    winnerBanner.innerText = '';
     _boardSquares.forEach((square) => {
       square.innerText = '';
+      square.removeEventListener('click', playerTwoMove, false);
       square.addEventListener('click', playerOneMove, false);
-      winnerBanner.innerHTML = '';
     });
     for (let i = 0; i < _board.length; i++) {
       _board[i] = '';
     }
   };
 
+  const playAgain = function () {
+    playerOneScore.innerText = 0;
+    playerTwoScore.innerText = 0;
+    clearBoard();
+    clearButton.removeEventListener('click', playAgain, false);
+    clearButton.addEventListener('click', clearBoard, false);
+    clearButton.innerText = 'Clear';
+  };
+
   clearButton.addEventListener('click', clearBoard, false);
 
-  const gameOver = function (winner) {
+  const roundOver = function (winner) {
     winnerBanner.innerText = winner;
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
@@ -40,25 +51,41 @@ const Game = (function () {
     });
   };
 
-
+  const gameOver = function (winner) {
+    winnerBanner.innerText = `${winner} is the first to three!`;
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerTwoMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerOneMove, false);
+    });
+    clearButton.innerText = 'Play Again?';
+    clearButton.removeEventListener('click', clearBoard, false);
+    clearButton.addEventListener('click', playAgain, false);
+  };
 
   const checkForWinner = function (currentMoves, winningMoves) {
-    console.log(_board);
     for (let i = 0; i < winningMoves.length; i++) {
       let a = currentMoves[winningMoves[i][0]];
       let b = currentMoves[winningMoves[i][1]];
       let c = currentMoves[winningMoves[i][2]];
       if (a === '' || b === '' || c === '') {
         continue;
-      } else if (a === b && b === c) {  
-          if (a === 'X') {
-            gameOver('Player One Wins This Round!!');
-            playerOneScore.innerText++;
-          } else if (a === 'O') {
-            gameOver('Player Two Wins This Round!!');
-            playerTwoScore.innerText++;
-          }
+      } else if (a === b && b === c) {
+        if (a === 'X') {
+          roundOver('Player One Wins This Round!!');
+          playerOneScore.innerText++;
+        } else if (a === 'O') {
+          roundOver('Player Two Wins This Round!!');
+          playerTwoScore.innerText++;
+        }
       }
+    }
+    if (playerOneScore.innerText === '3') {
+      gameOver('Player One!');
+    }
+    if (playerTwoScore.innerText === '3') {
+      gameOver('Player Two');
     }
   };
 
@@ -100,6 +127,5 @@ const Game = (function () {
     square.addEventListener('click', playerOneMove, false);
   });
 
-  return {playerOneMove, playerTwoMove };
+  return { playerOneMove, playerTwoMove };
 })();
-
