@@ -15,7 +15,8 @@ const Game = (function () {
   const _boardSquares = document.querySelectorAll('.game-square');
   const winnerBanner = document.getElementById('winner');
   const clearButton = document.querySelector('#clear-button');
-
+  const playerOneScore = document.getElementById('player-one-score');
+  const playerTwoScore = document.getElementById('player-two-score');
   const clearBoard = function () {
     _boardSquares.forEach((square) => {
       square.innerText = '';
@@ -40,17 +41,29 @@ const Game = (function () {
   };
 
   const checkForWinner = function (currentMoves, winningMoves) {
-    for (let i = 0; i < _board.length; i++) {
+    console.log(_board);
+    for (let i = 0; i < winningMoves.length; i++) {
       let a = currentMoves[winningMoves[i][0]];
       let b = currentMoves[winningMoves[i][1]];
       let c = currentMoves[winningMoves[i][2]];
       if (a === '' || b === '' || c === '') {
         continue;
       } else if (a === b && b === c) {
-        if (a === 'X') {
-          gameOver('Player One WINS!!');
-        } else if (a === 'O') {
-          gameOver('Player Two WINS!!');
+        if(playerOneScore.innerText < 3 && playerTwoScore.innerText < 3) {
+          if (a === 'X') {
+            gameOver('Player One Wins This Round!!');
+            playerOneScore.innerText++;
+          } else if (a === 'O') {
+            gameOver('Player Two Wins This Round!!');
+            playerTwoScore.innerText++;
+          }
+        } else {
+          if (a === 'X') {
+            gameOver('Player One FIRST TWO THREE!!! Player One Wins The Game!');
+            
+          } else if (a === 'O') {
+            gameOver('Player Two FIRST TWO THREE!!! Player Two Wins The Game!');
+          }
         }
       }
     }
@@ -73,7 +86,6 @@ const Game = (function () {
       });
       checkForWinner(_board, _winningConditions);
     }
-    console.log(_board);
   };
 
   const playerTwoMove = function () {
@@ -89,7 +101,6 @@ const Game = (function () {
       });
       checkForWinner(_board, _winningConditions);
     }
-    console.log(_board);
   };
 
   _boardSquares.forEach((square) => {
