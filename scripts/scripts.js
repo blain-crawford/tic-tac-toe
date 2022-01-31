@@ -116,15 +116,16 @@ const Game = (function () {
 
     if(playerOneHumanOrAI.value === 'AI') {
       let aiMove = Math.floor(Math.random() * 9);
+      let aiDiv = document.getElementById(`${aiMove}`);
+      aiDiv.innerText = 'X';
       console.log(aiMove);
       for (let i = 0; i < _board.length; i++) {
+        if(_board[aiMove] === '') {
+          _board[aiMove] = 'X';
+        } else {
+        }
         _board[aiMove] = 'X';
-        _boardSquares.forEach((square) => {
-          if(square.dataset.square === aiMove) {
-            square.innerText = 'X';
-            console.log(square.innerText);
-          }
-        })
+        console.log(aiDiv);
         console.log(_board);
       }
     }
