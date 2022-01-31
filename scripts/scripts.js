@@ -12,6 +12,7 @@ const Game = (function () {
     [0, 4, 8],
     [2, 4, 6],
   ];
+  let possibleAIMoves = [];
   const _boardSquares = document.querySelectorAll('.game-square');
   const winnerBanner = document.getElementById('winner');
   const clearButton = document.querySelector('#clear-button');
@@ -67,6 +68,11 @@ const Game = (function () {
   };
 
   const checkForWinner = function (currentMoves, winningMoves) {
+    for(let i = 0; i < _board.length; i++) {
+      if(!_board.includes('')) {
+        roundOver('Tie Game!');
+      }
+    }
     for (let i = 0; i < winningMoves.length; i++) {
       let a = currentMoves[winningMoves[i][0]];
       let b = currentMoves[winningMoves[i][1]];
@@ -93,60 +99,68 @@ const Game = (function () {
     }
   };
 
-  let makeMove = function (square, player) {
+  const makeMove = function (square, player) {
     _board[square] = `${player}`;
   };
 
+  const aiMove = function (move) {
+    for(let i = 0; i < _board.length; i++) {
+      if(_board[i] === '') {
+        possibleAIMoves.push(i)
+      }
+    }
+    let aiMove = Math.floor(Math.random() * possibleAIMoves.length)
+    let aiSquare = document.getElementById(`${possibleAIMoves[aiMove]}`);
+    _board[possibleAIMoves[aiMove]] = move;
+    aiSquare.innerText = move;
+    possibleAIMoves = [];
+  }
+  
   const playerOneMove = function () {
 
     if(playerOneHumanOrAI.value === 'player') {
       if (this.innerText === '') {
         this.innerText = 'X';
         makeMove(this.dataset.square, this.innerText);
-
-        _boardSquares.forEach((square) => {
-          square.removeEventListener('click', playerOneMove, false);
-        });
-        _boardSquares.forEach((square) => {
-          square.addEventListener('click', playerTwoMove, false);
-        });
-        checkForWinner(_board, _winningConditions);
       }
+      aiMove('O')
     }
 
     if(playerOneHumanOrAI.value === 'AI') {
-      let aiMove = Math.floor(Math.random() * 9);
-      let aiDiv = document.getElementById(`${aiMove}`);
-      aiDiv.innerText = 'X';
-      console.log(aiMove);
-      for (let i = 0; i < _board.length; i++) {
-        if(_board[aiMove] === '') {
-          _board[aiMove] = 'X';
-        } else {
-        }
-        _board[aiMove] = 'X';
-        console.log(aiDiv);
-        console.log(_board);
-      }
+      aiMove('X');
     }
-  };
 
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerOneMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.addEventListener('click', playerTwoMove, false);
+    });
+    checkForWinner(_board, _winningConditions);
+  };
   const playerTwoMove = function () {
     console.log(playerTwoHumanOrAI.value);
-    if (this.innerText === '') {
-      this.innerText = 'O';
-      makeMove(this.dataset.square, this.innerText);
-
-      _boardSquares.forEach((square) => {
-        square.removeEventListener('click', playerTwoMove, false);
-      });
-      _boardSquares.forEach((square) => {
-        square.addEventListener('click', playerOneMove, false);
-      });
-      checkForWinner(_board, _winningConditions);
+    if(playerTwoHumanOrAI.value === 'player') {
+      if (this.innerText === '') {
+        this.innerText = 'O';
+        makeMove(this.dataset.square, this.innerText);
+      }
     }
+
+    if(playerTwoHumanOrAI.value === 'AI') {
+      aiMove('O');
+    }
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerTwoMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.addEventListener('click', playerOneMove, false);
+    });
+
+    checkForWinner(_board, _winningConditions);
   };
 
+  
   _boardSquares.forEach((square) => {
     square.addEventListener('click', playerOneMove, false);
   });
