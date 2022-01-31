@@ -8,11 +8,18 @@
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <div id="container">
+    <div id="app-container">
       <div id="page-topper"><h1>TIC TAC TOE</h1></div>
       <div id="player-or-AI">
-        <div class="player-or-AI-selector">Player</div>
-        <div class="player-or-AI-selector">AI</div>
+        <select class="player-or-AI-selector" name="player-or-ai">
+          <option value="player">Player</option>
+          <option value="AI">AI</option>
+        </select>
+        <select class="player-or-AI-selector" name="player-or-ai">
+          <option value="player">Player</option>
+          <option value="AI">AI</option>
+        </select>
+        
       </div>
       <div id="player-container">
         <h2>Player One</h2>
@@ -38,8 +45,9 @@
           <h1 id="player-two-score">0</h1>
         </div>
       </div>
+      <button id="clear-button">Click to begin next round!</button>
     </div>
-    <button id="clear-button">Clear</button>
+    
     <script src="./scripts/scripts.js"></script>
   </body>
 </html>

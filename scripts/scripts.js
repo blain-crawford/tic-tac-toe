@@ -81,6 +81,8 @@ const Game = (function () {
         }
       }
     }
+
+
     if (playerOneScore.innerText === '3') {
       gameOver('Player One!');
     }
