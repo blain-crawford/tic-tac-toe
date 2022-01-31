@@ -17,6 +17,8 @@ const Game = (function () {
   const clearButton = document.querySelector('#clear-button');
   const playerOneScore = document.getElementById('player-one-score');
   const playerTwoScore = document.getElementById('player-two-score');
+  const playerOneHumanOrAI = document.getElementById('player-or-AI-left');
+  const playerTwoHumanOrAI = document.getElementById('player-or-AI-right');
 
   const clearBoard = function () {
     winnerBanner.innerText = '';
@@ -96,21 +98,40 @@ const Game = (function () {
   };
 
   const playerOneMove = function () {
-    if (this.innerText === '') {
-      this.innerText = 'X';
-      makeMove(this.dataset.square, this.innerText);
 
-      _boardSquares.forEach((square) => {
-        square.removeEventListener('click', playerOneMove, false);
-      });
-      _boardSquares.forEach((square) => {
-        square.addEventListener('click', playerTwoMove, false);
-      });
-      checkForWinner(_board, _winningConditions);
+    if(playerOneHumanOrAI.value === 'player') {
+      if (this.innerText === '') {
+        this.innerText = 'X';
+        makeMove(this.dataset.square, this.innerText);
+
+        _boardSquares.forEach((square) => {
+          square.removeEventListener('click', playerOneMove, false);
+        });
+        _boardSquares.forEach((square) => {
+          square.addEventListener('click', playerTwoMove, false);
+        });
+        checkForWinner(_board, _winningConditions);
+      }
+    }
+
+    if(playerOneHumanOrAI.value === 'AI') {
+      let aiMove = Math.floor(Math.random() * 9);
+      console.log(aiMove);
+      for (let i = 0; i < _board.length; i++) {
+        _board[aiMove] = 'X';
+        _boardSquares.forEach((square) => {
+          if(square.dataset.square === aiMove) {
+            square.innerText = 'X';
+            console.log(square.innerText);
+          }
+        })
+        console.log(_board);
+      }
     }
   };
 
   const playerTwoMove = function () {
+    console.log(playerTwoHumanOrAI.value);
     if (this.innerText === '') {
       this.innerText = 'O';
       makeMove(this.dataset.square, this.innerText);
