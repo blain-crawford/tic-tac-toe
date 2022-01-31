@@ -32,6 +32,9 @@ const Game = (function () {
     for (let i = 0; i < _board.length; i++) {
       _board[i] = '';
     }
+    if(playerOneHumanOrAI.value === 'AI') {
+      aiMove('X');
+    }
   };
 
   const playAgain = function () {
@@ -99,6 +102,16 @@ const Game = (function () {
     }
   };
 
+  const activatePlayerOneAI = function() {
+    if(this.value === 'AI') {
+      aiMove('X');
+    }
+    if(this.value === 'player') {
+      clearBoard();
+    }
+  };
+  playerOneHumanOrAI.addEventListener('change', activatePlayerOneAI.bind(playerOneHumanOrAI), false);
+
   const makeMove = function (square, player) {
     _board[square] = `${player}`;
   };
@@ -134,7 +147,7 @@ const Game = (function () {
       });
     }
   };
-  
+
   if(playerOneHumanOrAI.value === 'AI') {
     console.log(aiTurn);
   };
@@ -163,6 +176,7 @@ const Game = (function () {
 
     checkForWinner(_board, _winningConditions);
   };
+
   const playerTwoMove = function () {
     if (playerTwoHumanOrAI.value === 'player') {
       if (this.innerText === '') {
@@ -174,6 +188,9 @@ const Game = (function () {
         _boardSquares.forEach((square) => {
           square.addEventListener('click', playerOneMove, false);
         });
+        if(playerOneHumanOrAI.value === 'AI') {
+          aiMove('X');
+        }
       }
     }
 
