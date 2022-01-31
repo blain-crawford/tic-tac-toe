@@ -36,7 +36,7 @@ const Game = (function () {
     clearBoard();
     clearButton.removeEventListener('click', playAgain, false);
     clearButton.addEventListener('click', clearBoard, false);
-    clearButton.innerText = 'Clear';
+    clearButton.innerText = 'Click to begin next round!';
   };
 
   clearButton.addEventListener('click', clearBoard, false);
@@ -52,7 +52,7 @@ const Game = (function () {
   };
 
   const gameOver = function (winner) {
-    winnerBanner.innerText = `${winner} is the first to three!`;
+    winnerBanner.innerText = `First To Three Is ${winner}`;
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
     });
