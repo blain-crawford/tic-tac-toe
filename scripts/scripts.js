@@ -40,6 +40,8 @@ const Game = (function () {
     });
   };
 
+
+
   const checkForWinner = function (currentMoves, winningMoves) {
     console.log(_board);
     for (let i = 0; i < winningMoves.length; i++) {
@@ -48,8 +50,7 @@ const Game = (function () {
       let c = currentMoves[winningMoves[i][2]];
       if (a === '' || b === '' || c === '') {
         continue;
-      } else if (a === b && b === c) {
-        if(playerOneScore.innerText < 3 && playerTwoScore.innerText < 3) {
+      } else if (a === b && b === c) {  
           if (a === 'X') {
             gameOver('Player One Wins This Round!!');
             playerOneScore.innerText++;
@@ -57,14 +58,6 @@ const Game = (function () {
             gameOver('Player Two Wins This Round!!');
             playerTwoScore.innerText++;
           }
-        } else {
-          if (a === 'X') {
-            gameOver('Player One FIRST TWO THREE!!! Player One Wins The Game!');
-            
-          } else if (a === 'O') {
-            gameOver('Player Two FIRST TWO THREE!!! Player Two Wins The Game!');
-          }
-        }
       }
     }
   };
