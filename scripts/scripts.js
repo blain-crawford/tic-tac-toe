@@ -13,6 +13,7 @@ const Game = (function () {
     [2, 4, 6],
   ];
   let possibleAIMoves = [];
+  let aiTurn = false;
   const _boardSquares = document.querySelectorAll('.game-square');
   const winnerBanner = document.getElementById('winner');
   const clearButton = document.querySelector('#clear-button');
@@ -68,8 +69,8 @@ const Game = (function () {
   };
 
   const checkForWinner = function (currentMoves, winningMoves) {
-    for(let i = 0; i < _board.length; i++) {
-      if(!_board.includes('')) {
+    for (let i = 0; i < _board.length; i++) {
+      if (!_board.includes('')) {
         roundOver('Tie Game!');
       }
     }
@@ -90,7 +91,6 @@ const Game = (function () {
       }
     }
 
-
     if (playerOneScore.innerText === '3') {
       gameOver('Player One!');
     }
@@ -104,63 +104,86 @@ const Game = (function () {
   };
 
   const aiMove = function (move) {
-    for(let i = 0; i < _board.length; i++) {
-      if(_board[i] === '') {
-        possibleAIMoves.push(i)
+    for (let i = 0; i < _board.length; i++) {
+      if (_board[i] === '') {
+        possibleAIMoves.push(i);
       }
     }
-    let aiMove = Math.floor(Math.random() * possibleAIMoves.length)
-    let aiSquare = document.getElementById(`${possibleAIMoves[aiMove]}`);
-    _board[possibleAIMoves[aiMove]] = move;
+
+    let aiSquareChoice = Math.floor(Math.random() * possibleAIMoves.length);
+    let aiSquare = document.getElementById(`${possibleAIMoves[aiSquareChoice]}`);
+    _board[possibleAIMoves[aiSquareChoice]] = move;
     aiSquare.innerText = move;
     possibleAIMoves = [];
-  }
+    
+    if (move === 'O') {
+      console.log(move === 'O');
+      _boardSquares.forEach((square) => {
+        square.removeEventListener('click', playerTwoMove, false);
+      });
+      _boardSquares.forEach((square) => {
+        square.addEventListener('click', playerOneMove, false);
+      });
+    } else if (move === 'X') {
+      console.log(move)
+      _boardSquares.forEach((square) => {
+        square.removeEventListener('click', playerOneMove, false);
+      });
+      _boardSquares.forEach((square) => {
+        square.addEventListener('click', playerTwoMove, false);
+      });
+    }
+  };
   
-  const playerOneMove = function () {
+  if(playerOneHumanOrAI.value === 'AI') {
+    console.log(aiTurn);
+  };
 
-    if(playerOneHumanOrAI.value === 'player') {
+  const playerOneMove = function () {
+    if (playerOneHumanOrAI.value === 'player') {
       if (this.innerText === '') {
         this.innerText = 'X';
         makeMove(this.dataset.square, this.innerText);
+        _boardSquares.forEach((square) => {
+          square.removeEventListener('click', playerOneMove, false);
+        });
+        _boardSquares.forEach((square) => {
+          square.addEventListener('click', playerTwoMove, false);
+        });
+        if (playerTwoHumanOrAI.value === 'AI') {
+          aiMove('O');
+        }
       }
-      aiMove('O')
     }
 
-    if(playerOneHumanOrAI.value === 'AI') {
+    if (playerOneHumanOrAI.value === 'AI') {
       aiMove('X');
     }
 
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerOneMove, false);
-    });
-    _boardSquares.forEach((square) => {
-      square.addEventListener('click', playerTwoMove, false);
-    });
+
     checkForWinner(_board, _winningConditions);
   };
   const playerTwoMove = function () {
-    console.log(playerTwoHumanOrAI.value);
-    if(playerTwoHumanOrAI.value === 'player') {
+    if (playerTwoHumanOrAI.value === 'player') {
       if (this.innerText === '') {
         this.innerText = 'O';
         makeMove(this.dataset.square, this.innerText);
+        _boardSquares.forEach((square) => {
+          square.removeEventListener('click', playerTwoMove, false);
+        });
+        _boardSquares.forEach((square) => {
+          square.addEventListener('click', playerOneMove, false);
+        });
       }
     }
 
-    if(playerTwoHumanOrAI.value === 'AI') {
+    if (playerTwoHumanOrAI.value === 'AI') {
       aiMove('O');
     }
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerTwoMove, false);
-    });
-    _boardSquares.forEach((square) => {
-      square.addEventListener('click', playerOneMove, false);
-    });
 
     checkForWinner(_board, _winningConditions);
   };
 
-  
   _boardSquares.forEach((square) => {
     square.addEventListener('click', playerOneMove, false);
   });
