@@ -18,6 +18,7 @@ html {
   background-color: rgb(204, 153, 119);
 }
 
+/* full game board */
 #app-container {
   width: 900px;
   min-width: none;
@@ -29,7 +30,8 @@ html {
   background-color: rgb(207, 171, 118);
 }
 
-@media(max-width: 1000px){
+/* handles centering in mobile devices */
+@media (max-width: 1000px) {
   #app-container {
     margin: 0;
     position: absolute;
@@ -39,6 +41,7 @@ html {
   }
 }
 
+/* tic tac toe logo */
 #page-topper {
   text-align: center;
   font-size: 20px;
@@ -48,10 +51,12 @@ html {
   padding: 30px;
 }
 
-#page-topper, h1 {
+#page-topper,
+h1 {
   margin: 0 auto;
 }
 
+/* where winner is shown */
 #player-container {
   display: flex;
   justify-content: space-around;
@@ -64,12 +69,14 @@ html {
   text-decoration: underline;
 }
 
+/* holds gameboard and scores */
 #game-and-score-container {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
 }
 
+/* where scores are held */
 .score-container {
   font-size: 20px;
   font-family: cartoon;
@@ -82,6 +89,7 @@ html {
   justify-content: flex-start;
 }
 
+/* actual tic tac toe board */
 #game-board {
   min-width: 500px;
   min-height: 500px;
@@ -93,6 +101,7 @@ html {
   background-color: black;
 }
 
+/* individual squares */
 .game-square {
   background-color: rgb(207, 171, 118);
   cursor: pointer;
@@ -101,9 +110,9 @@ html {
   align-items: center;
   font-size: 100px;
   font-family: cartoon;
+}
 
-} 
-
+/* clear button at bottom */
 #clear-button {
   margin: 20px auto 30px auto;
   font-size: 20px;
