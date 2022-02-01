@@ -10,6 +10,12 @@
 ## Running the Application
   - Clone Repsitory
   - Use LiveServer extension in VScode to run locahost
-  - Click any Square to make first play
+  - Click any Square to make first play as X
 
-  <video src="./videos/first-move.mov" height="300px" loop></video>
+  <video src="./videos/first-move.mov" height="300px" autoplay loop></video>
+
+  - Click again to play O
+
+  <video src="./videos/second-move.mov" height="300px" autoplay loop></video>
+
+  - continue playing until best of 3!
