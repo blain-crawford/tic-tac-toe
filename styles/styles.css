@@ -29,6 +29,16 @@ html {
   background-color: rgb(207, 171, 118);
 }
 
+@media(max-width: 1000px){
+  #app-container {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(10%);
+  }
+}
+
 #page-topper {
   text-align: center;
   font-size: 20px;

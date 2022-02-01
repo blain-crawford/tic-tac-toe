@@ -73,23 +73,13 @@ const Game = (function () {
 
   const roundOver = function (winner) {
     winnerBanner.innerText = winner;
-
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerTwoMove, false);
-    });
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerOneMove, false);
-    });
+    stopMoves();
   };
 
   const gameOver = function (winner) {
     winnerBanner.innerText = `First To Three Is ${winner}`;
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerTwoMove, false);
-    });
-    _boardSquares.forEach((square) => {
-      square.removeEventListener('click', playerOneMove, false);
-    });
+    stopMoves();
+
     clearButton.innerText = 'Play Again?';
     clearButton.removeEventListener('click', clearBoard, false);
     clearButton.addEventListener('click', playAgain, false);
@@ -133,12 +123,7 @@ const Game = (function () {
       if (this.innerText === '') {
         this.innerText = 'X';
         makeMove(this.dataset.square, this.innerText);
-        _boardSquares.forEach((square) => {
-          square.removeEventListener('click', playerOneMove, false);
-        });
-        _boardSquares.forEach((square) => {
-          square.addEventListener('click', playerTwoMove, false);
-        });
+        playerTwoTurn();
     }
     checkForWinner(_board, _winningConditions);
   };
@@ -147,12 +132,7 @@ const Game = (function () {
       if (this.innerText === '') {
         this.innerText = 'O';
         makeMove(this.dataset.square, this.innerText);
-        _boardSquares.forEach((square) => {
-          square.removeEventListener('click', playerTwoMove, false);
-        });
-        _boardSquares.forEach((square) => {
-          square.addEventListener('click', playerOneMove, false);
-        });
+        playerOneTurn();
       }
     checkForWinner(_board, _winningConditions);
   };
@@ -161,5 +141,4 @@ const Game = (function () {
     square.addEventListener('click', playerOneMove, false);
   });
 
-  return {playerOneMove, playerTwoMove};
 })();
