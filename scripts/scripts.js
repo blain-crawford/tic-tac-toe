@@ -34,6 +34,7 @@ const Game = (function () {
   };
 
   const playAgain = function () {
+    debugger;
     playerOneScore.innerText = 0;
     playerTwoScore.innerText = 0;
     clearBoard();
@@ -63,6 +64,7 @@ const Game = (function () {
       square.removeEventListener('click', playerOneMove, false);
     });
     clearButton.innerText = 'Play Again?';
+    debugger;
     clearButton.removeEventListener('click', clearBoard, false);
     clearButton.addEventListener('click', playAgain, false);
   };
@@ -117,6 +119,7 @@ const Game = (function () {
   };
 
   const playerTwoMove = function () {
+    debugger;
       if (this.innerText === '') {
         this.innerText = 'O';
         makeMove(this.dataset.square, this.innerText);

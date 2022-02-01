@@ -15,6 +15,7 @@ html {
   padding: 0;
   box-sizing: border-box;
   text-align: center;
+  background-color: rgb(204, 153, 119);
 }
 
 #app-container {
@@ -23,9 +24,9 @@ html {
   height: auto;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid blue;
+  border: 1px solid black;
   border-radius: 15%;
-  background-color: rosybrown;
+  background-color: rgb(207, 171, 118);
 }
 
 #page-topper {
@@ -79,18 +80,18 @@ html {
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 2px;
   grid-row-gap: 2px;
-  border-radius: 15%;
+  background-color: black;
 }
 
 .game-square {
-  background-color: white;
+  background-color: rgb(207, 171, 118);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 100px;
   font-family: cartoon;
-  border-radius:15%;
+
 } 
 
 #clear-button {
@@ -99,5 +100,5 @@ html {
   font-family: cartoon;
   padding: 10px;
   border-radius: 30%;
-  background-color: green;
+  background-color: rgb(231, 210, 179);
 }
