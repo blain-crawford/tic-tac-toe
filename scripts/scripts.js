@@ -18,23 +18,52 @@ const Game = (function () {
   const playerOneScore = document.getElementById('player-one-score');
   const playerTwoScore = document.getElementById('player-two-score');
 
+  const playerOneTurn = function () {
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerTwoMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.addEventListener('click', playerOneMove, false);
+    });
+  }
+
+  const playerTwoTurn = function () {
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerOneMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.addEventListener('click', playerTwoMove, false);
+    });
+  }
+
+  const stopMoves = function () {
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerTwoMove, false);
+    });
+    _boardSquares.forEach((square) => {
+      square.removeEventListener('click', playerOneMove, false);
+    });
+  }
+
   const clearBoard = function () {
     winnerBanner.innerText = '';
     _boardSquares.forEach((square) => {
       square.innerText = '';
-      square.removeEventListener('click', playerTwoMove, false);
-      square.addEventListener('click', playerOneMove, false);
     });
+
+    playerOneTurn();
+
     for (let i = 0; i < _board.length; i++) {
       _board[i] = '';
     }
   };
 
   const playAgain = function () {
-    debugger;
     playerOneScore.innerText = 0;
     playerTwoScore.innerText = 0;
+
     clearBoard();
+
     clearButton.removeEventListener('click', playAgain, false);
     clearButton.addEventListener('click', clearBoard, false);
     clearButton.innerText = 'Click to begin next round!';
@@ -44,6 +73,7 @@ const Game = (function () {
 
   const roundOver = function (winner) {
     winnerBanner.innerText = winner;
+
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
     });
