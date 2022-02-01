@@ -28,9 +28,6 @@ const Game = (function () {
     for (let i = 0; i < _board.length; i++) {
       _board[i] = '';
     }
-    if (playerOneHumanOrAI.value === 'AI') {
-      aiMove('X');
-    }
   };
 
   const playAgain = function () {
@@ -56,7 +53,6 @@ const Game = (function () {
   };
 
   const gameOver = function (winner) {
-    debugger;
     winnerBanner.innerText = `First To Three Is ${winner}`;
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
@@ -65,7 +61,6 @@ const Game = (function () {
       square.removeEventListener('click', playerOneMove, false);
     });
     clearButton.innerText = 'Play Again?';
-    debugger;
     clearButton.removeEventListener('click', clearBoard, false);
     clearButton.addEventListener('click', playAgain, false);
   };
@@ -92,7 +87,6 @@ const Game = (function () {
         }
       }
     }
-
     if (playerOneScore.innerText === '3') {
       gameOver('Player One!');
     }
