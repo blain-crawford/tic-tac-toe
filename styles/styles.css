@@ -1,3 +1,13 @@
+@font-face {
+  font-family: cartoon;
+  src: url(../fonts/cartoon.ttf);
+}
+
+@font-face {
+  font-family: XO;
+  src: url(../fonts/XO.ttf);
+}
+
 @import url(./reset.css);
 body,
 html {
@@ -11,56 +21,54 @@ html {
   width: 900px;
   min-width: none;
   height: auto;
-  margin: 0 auto;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid blue;
+  border-radius: 15%;
+  background-color: rosybrown;
 }
 
 #page-topper {
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
+  font-family: cartoon;
   min-width: 0;
-  margin: 0 auto;
+  margin: 20px auto;
+  padding: 30px;
 }
 
-#player-or-AI {
+#page-topper, h1 {
   margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 30px;
-} 
-
-.player-or-AI-selector {
-  width: 6em;
-  height: 2em;
-  line-height: 10px;
-  font-size: 30px;
-  border-radius: 15%;
-  padding: 10px;
-  border: 2px solid blue;
-  text-align: center;
 }
 
 #player-container {
   display: flex;
-  padding: 20px;
-  justify-content: space-between;
-  font-size: 30px;
+  justify-content: space-around;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-family: cartoon;
   text-decoration: underline;
 }
 
 #game-and-score-container {
-  padding: 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 30px;
 }
 
 .score-container {
-  font-size: 60px;
+  font-size: 20px;
+  font-family: cartoon;
+  margin-left: auto;
+  margin-right: auto;
   min-width: 0;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #game-board {
@@ -71,7 +79,7 @@ html {
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 2px;
   grid-row-gap: 2px;
-  background-color: black;
+  border-radius: 15%;
 }
 
 .game-square {
@@ -80,5 +88,16 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 150px;
+  font-size: 100px;
+  font-family: cartoon;
+  border-radius:15%;
 } 
+
+#clear-button {
+  margin: 20px auto 30px auto;
+  font-size: 20px;
+  font-family: cartoon;
+  padding: 10px;
+  border-radius: 30%;
+  background-color: green;
+}
