@@ -189,12 +189,14 @@ const Game = (function () {
       if (this.innerText === '') {
         this.innerText = 'O';
         makeMove(this.dataset.square, this.innerText);
+
         _boardSquares.forEach((square) => {
           square.removeEventListener('click', playerTwoMove, false);
         });
         _boardSquares.forEach((square) => {
           square.addEventListener('click', playerOneMove, false);
         });
+
         if(playerOneHumanOrAI.value === 'AI') {
           aiMove('X');
         }
@@ -207,7 +209,6 @@ const Game = (function () {
         aiMove('X');
       }
     }
-
     checkForWinner(_board, _winningConditions);
   };
 
