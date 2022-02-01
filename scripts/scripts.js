@@ -1,6 +1,9 @@
 'use strict';
 
 const Game = (function () {
+  /**
+   * set up private variables
+   */
   let _board = ['', '', '', '', '', '', '', '', ''];
   let _winningConditions = [
     [0, 1, 2],
@@ -18,6 +21,9 @@ const Game = (function () {
   const playerOneScore = document.getElementById('player-one-score');
   const playerTwoScore = document.getElementById('player-two-score');
 
+  /**
+   * logic for switching players
+   */
   const playerOneTurn = function () {
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
@@ -25,7 +31,7 @@ const Game = (function () {
     _boardSquares.forEach((square) => {
       square.addEventListener('click', playerOneMove, false);
     });
-  }
+  };
 
   const playerTwoTurn = function () {
     _boardSquares.forEach((square) => {
@@ -34,7 +40,7 @@ const Game = (function () {
     _boardSquares.forEach((square) => {
       square.addEventListener('click', playerTwoMove, false);
     });
-  }
+  };
 
   const stopMoves = function () {
     _boardSquares.forEach((square) => {
@@ -43,8 +49,12 @@ const Game = (function () {
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerOneMove, false);
     });
-  }
+  };
 
+
+  /**
+   * clear board after round
+   */
   const clearBoard = function () {
     winnerBanner.innerText = '';
     _boardSquares.forEach((square) => {
@@ -58,6 +68,10 @@ const Game = (function () {
     }
   };
 
+
+  /**
+   * clear board at end of game and reset game
+   */
   const playAgain = function () {
     playerOneScore.innerText = 0;
     playerTwoScore.innerText = 0;
@@ -85,6 +99,12 @@ const Game = (function () {
     clearButton.addEventListener('click', playAgain, false);
   };
 
+
+  /**
+   * checks moves made against winning conditions
+   * @param {*} currentMoves 
+   * @param {*} winningMoves 
+   */
   const checkForWinner = function (currentMoves, winningMoves) {
     for (let i = 0; i < _board.length; i++) {
       if (!_board.includes('')) {
@@ -95,6 +115,7 @@ const Game = (function () {
       let a = currentMoves[winningMoves[i][0]];
       let b = currentMoves[winningMoves[i][1]];
       let c = currentMoves[winningMoves[i][2]];
+
       if (a === '' || b === '' || c === '') {
         continue;
       } else if (a === b && b === c) {
@@ -107,6 +128,7 @@ const Game = (function () {
         }
       }
     }
+
     if (playerOneScore.innerText === '3') {
       gameOver('Player One!');
     }
@@ -115,30 +137,42 @@ const Game = (function () {
     }
   };
 
+  /**
+   * adds player move to private variable _board
+   * @param {*} square 
+   * @param {*} player 
+   */
   const makeMove = function (square, player) {
     _board[square] = `${player}`;
   };
 
+
+  /**
+   * logic for X player
+   */
   const playerOneMove = function () {
-      if (this.innerText === '') {
-        this.innerText = 'X';
-        makeMove(this.dataset.square, this.innerText);
-        playerTwoTurn();
+    if (this.innerText === '') {
+      this.innerText = 'X';
+      makeMove(this.dataset.square, this.innerText);
+      playerTwoTurn();
     }
     checkForWinner(_board, _winningConditions);
   };
 
+
+  /**
+   * logic for O player
+   */
   const playerTwoMove = function () {
-      if (this.innerText === '') {
-        this.innerText = 'O';
-        makeMove(this.dataset.square, this.innerText);
-        playerOneTurn();
-      }
+    if (this.innerText === '') {
+      this.innerText = 'O';
+      makeMove(this.dataset.square, this.innerText);
+      playerOneTurn();
+    }
     checkForWinner(_board, _winningConditions);
   };
 
   _boardSquares.forEach((square) => {
     square.addEventListener('click', playerOneMove, false);
   });
-
 })();
