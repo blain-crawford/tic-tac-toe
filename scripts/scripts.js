@@ -56,6 +56,7 @@ const Game = (function () {
   };
 
   const gameOver = function (winner) {
+    debugger;
     winnerBanner.innerText = `First To Three Is ${winner}`;
     _boardSquares.forEach((square) => {
       square.removeEventListener('click', playerTwoMove, false);
@@ -119,11 +120,9 @@ const Game = (function () {
   };
 
   const playerTwoMove = function () {
-    debugger;
       if (this.innerText === '') {
         this.innerText = 'O';
         makeMove(this.dataset.square, this.innerText);
-
         _boardSquares.forEach((square) => {
           square.removeEventListener('click', playerTwoMove, false);
         });
